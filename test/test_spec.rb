@@ -1,6 +1,3 @@
-require 'test/unit'
-require_relative 'nspec'
-
 class TestDescribe < Test::Unit::TestCase
   def test_that_it_can_pass
     describe 'some thing' do
