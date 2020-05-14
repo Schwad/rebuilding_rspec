@@ -1,4 +1,4 @@
-class DelayedAssertion
+class ComparisonAssertion
   include Assertions
 
   def initialize(subject)

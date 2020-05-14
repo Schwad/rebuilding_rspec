@@ -1,9 +1,16 @@
 require 'pry'
 require_relative "assertions"
-require_relative "delayed_assertion"
+require_relative "comparison_assertion"
 require_relative "errors"
 
+GREEN = "\e[32m"
+RED = "\e[31m"
+RESET = "\e[0m"
+
+# Watch 'an editor from scratch'
+
 def describe(description, &block)
+  puts description
   ExampleGroup.new(block).evaluate!
 end
 
@@ -18,13 +25,21 @@ class ExampleGroup
   end
 
   def it(description, &block)
-    block.call
+    begin
+      print "  - #{description}"
+      block.call
+      puts "#{GREEN} (ok)#{RESET}"
+    rescue Exception => e
+      puts "#{RED} (fail)#{RESET}"
+      puts e.message
+      puts e.backtrace
+    end
   end
 end
 
 class Object
   # Reopening object lets us call should on anything
   def should
-    DelayedAssertion.new(self)
+    ComparisonAssertion.new(self)
   end
 end

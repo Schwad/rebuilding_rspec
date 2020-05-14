@@ -1,5 +1,9 @@
 module Assertions
   def ==(other)
-    raise AssertionError unless @subject == other
+    unless @subject == other
+      raise AssertionError.new(
+        "Expected #{@subject.inspect} but got #{other.inspect}"
+      )
+    end
   end
 end
