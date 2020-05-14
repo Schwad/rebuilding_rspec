@@ -1,4 +1,7 @@
 require 'pry'
+require_relative "assertions"
+require_relative "delayed_assertion"
+require_relative "errors"
 
 def describe(description, &block)
   ExampleGroup.new(block).evaluate!
@@ -21,28 +24,7 @@ end
 
 class Object
   # Reopening object lets us call should on anything
-  def should(comparison_object=nil)
-    if comparison_object
-      comparison_object.call
-    else
-      DelayedAssertion.new(self)
-    end
+  def should
+    DelayedAssertion.new(self)
   end
-end
-
-module Assertions
-  def ==(other)
-    raise AssertionError unless @subject == other
-  end
-end
-
-class DelayedAssertion
-  include Assertions
-
-  def initialize(subject)
-    @subject = subject
-  end
-end
-
-class AssertionError < Exception
 end
