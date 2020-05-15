@@ -6,8 +6,7 @@ test_dir = File.join(base_dir, "test")
 
 $LOAD_PATH.unshift(lib_dir)
 
-require 'test/unit'
-require_relative '../nspec'
+require_relative '../runner'
 
 
 exit Test::Unit::AutoRunner.run(true, test_dir)

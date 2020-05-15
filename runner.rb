@@ -28,9 +28,9 @@ class ExampleGroup
     begin
       print "  - #{description}"
       block.call
-      puts "#{GREEN} (ok)#{RESET}"
+      puts "#{GREEN} (✓)#{RESET}"
     rescue Exception => e
-      puts "#{RED} (fail)#{RESET}"
+      puts "#{RED} (✖)#{RESET}"
       puts e.message
       puts e.backtrace
     end

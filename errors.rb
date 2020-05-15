@@ -1,3 +1,2 @@
-
 class AssertionError < Exception
 end
